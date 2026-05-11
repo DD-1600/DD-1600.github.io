@@ -39,7 +39,10 @@ jobs:
           cache: npm
 
       - name: Install
-        run: npm ci
+        # npm install (not npm ci) — package-lock.json may have been generated
+        # against an older package.json (different OS, different npm version).
+        # Let npm reconcile rather than fail on lock-file drift.
+        run: npm install --no-audit --no-fund
 
       - name: Build
         env:
