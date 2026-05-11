@@ -1,0 +1,137 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<BaseLayout
+  title="Peak Pomodoro — Privacy Policy"
+  description="Privacy policy for Peak Pomodoro, a Pomodoro focus-timer app by Northland Studios. Data Not Collected."
+>
+  <Nav />
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <div class="mono label">§ Peak Pomodoro</div>
+        <h1>Privacy Policy</h1>
+        <p class="lede">Effective <strong>2026-05-11</strong>. Short version: nothing leaves your device unless you opt in to Apple-managed sync.</p>
+      </div>
+    </header>
+
+    <section class="section narrow">
+      <p>
+        Peak Pomodoro is published by Northland Studios. This policy explains what data the app collects, how it is used, and your choices.
+      </p>
+
+      <div class="mono label">§ Summary</div>
+      <ul>
+        <li>We do <strong>not</strong> sell your data.</li>
+        <li>We do <strong>not</strong> track you across other apps or websites.</li>
+        <li>We do <strong>not</strong> use third-party analytics or advertising SDKs.</li>
+        <li>Session history is stored on-device and (optionally) synced via your private iCloud account.</li>
+      </ul>
+
+      <div class="mono label">§ What we collect</div>
+      <p>The categories below align with Apple's App Privacy nutrition label. Only the categories that apply to Peak Pomodoro appear here.</p>
+      <ul>
+        <li>
+          <strong>Health &amp; Fitness (HealthKit).</strong> If you grant permission, completed focus sessions are written to Apple Health as <em>Mindful Minutes</em>. HealthKit data lives in Apple's on-device, encrypted Health store. Peak Pomodoro never transmits HealthKit data off your device.
+        </li>
+        <li>
+          <strong>User Content.</strong> Session history, streaks, peak progress, settings. Stored on-device. If you have iCloud enabled, this data syncs across your devices via <em>NSUbiquitousKeyValueStore</em> — an Apple-managed, account-private sync surface. Northland Studios has no access to this data.
+        </li>
+        <li>
+          <strong>Identifiers.</strong> None. No IDFA. No cross-app identifier. No login.
+        </li>
+        <li>
+          <strong>Diagnostics.</strong> Crash logs and performance data may be sent to Apple's standard crash reporter <em>only</em> if you opted in to <em>Share With App Developers</em> in iOS Settings. These reports are aggregated by Apple and contain no personal information.
+        </li>
+        <li>
+          <strong>Purchases.</strong> The optional tip jar is handled entirely by Apple's StoreKit. We see anonymized receipt data sufficient to verify a purchase — nothing else.
+        </li>
+      </ul>
+
+      <div class="mono label">§ How we use it</div>
+      <p>
+        Session history powers the Stats heatmap, weekly streaks, and peak-unlock progression — all of which run on-device. HealthKit data, where granted, exists so your focus sessions show up next to your other Mindful Minutes in Apple Health. Tip-jar receipts unlock the cosmetic supporter badge in the About section. None of this data is used for advertising or third-party analytics.
+      </p>
+
+      <div class="mono label">§ Data sharing</div>
+      <p>Peak Pomodoro does not share data with third parties, except:</p>
+      <ul>
+        <li><strong>Apple</strong>, for App Store delivery, opt-in crash reports, in-app purchase processing, HealthKit storage, and iCloud Key-Value sync. All Apple-managed.</li>
+      </ul>
+      <p>We will only disclose data if required by law (e.g., a valid subpoena) and will notify you where legally permitted.</p>
+
+      <div class="mono label">§ Data retention</div>
+      <p>
+        Data stored on your device stays on your device until you delete it or uninstall the app. We do not maintain server-side copies. iCloud-synced data is retained by Apple under your iCloud account's terms; deleting Peak Pomodoro from a device does not remove its iCloud KV records — you can clear them via <em>Settings &rarr; Apple ID &rarr; iCloud &rarr; Manage Account Storage</em>.
+      </p>
+
+      <div class="mono label">§ Your rights</div>
+      <ul>
+        <li>Delete all app data by uninstalling Peak Pomodoro.</li>
+        <li>For HealthKit data: <em>Settings &rarr; Privacy &amp; Security &rarr; Health &rarr; Peak Pomodoro &rarr; Delete All Data</em>.</li>
+        <li>Contact us at <a href="mailto:danieldavis16@gmail.com">danieldavis16@gmail.com</a> with any privacy question.</li>
+      </ul>
+      <p>If you're in the EU, UK, or California, you have additional rights under GDPR / UK GDPR / CCPA — contact us and we'll honor them. Because we don't transmit data off-device, most of these rights resolve to deleting the app.</p>
+
+      <div class="mono label">§ Children</div>
+      <p>
+        Peak Pomodoro is not directed at children under 13 and does not knowingly collect data from them. If you believe a child has provided information to us, contact <a href="mailto:danieldavis16@gmail.com">danieldavis16@gmail.com</a> and we'll address it.
+      </p>
+
+      <div class="mono label">§ Changes</div>
+      <p>We'll update this page if data practices change. The effective date above reflects the current version. Material changes will also be flagged in the app's release notes.</p>
+
+      <div class="mono label">§ Contact</div>
+      <p>
+        <a href="mailto:danieldavis16@gmail.com">danieldavis16@gmail.com</a><br/>
+        Northland Studios
+      </p>
+
+      <p class="back">
+        <a href="/peak-pomodoro/support">Support &rarr;</a>
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-hero { background: var(--bg-soft); border-bottom: 1px solid var(--rule); }
+  .page-hero-inner { max-width: var(--col-narrow); margin: 0 auto; padding: clamp(60px, 10vh, 100px) var(--pad-page); }
+  .page-hero .label { color: var(--accent); margin: 0 0 14px 0; }
+  .page-hero h1 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    margin: 0 0 22px 0;
+  }
+  .page-hero .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  .section.narrow { padding-top: clamp(50px, 6vh, 80px); padding-bottom: clamp(50px, 6vh, 80px); max-width: var(--col-narrow); margin: 0 auto; padding-left: var(--pad-page); padding-right: var(--pad-page); }
+  .section .label { color: var(--accent); margin: 36px 0 12px 0; }
+  .section .label:first-child { margin-top: 0; }
+  .section p, .section ul {
+    font-size: 17px;
+    line-height: 1.66;
+    color: var(--ink-secondary);
+    margin: 0 0 18px 0;
+    max-width: 62ch;
+  }
+  .section ul { padding-left: 22px; }
+  .section li { margin: 0 0 10px 0; }
+  .section a { color: var(--accent); }
+  .section .back { margin-top: 36px; }
+</style>
