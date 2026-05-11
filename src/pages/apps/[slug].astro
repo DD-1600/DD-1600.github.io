@@ -1,0 +1,296 @@
+---
+/**
+ * Per-app page. Static-generated for every slug in src/data/apps.ts.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import Blaze from '@components/Blaze.astro';
+import AppCard from '@components/AppCard.astro';
+import AppStoreBadge from '@components/AppStoreBadge.astro';
+import StoreRating from '@components/StoreRating.astro';
+import ScreenshotStrip from '@components/ScreenshotStrip.astro';
+import { apps, type AppEntry } from '@data/apps';
+
+export async function getStaticPaths() {
+  return apps.map((app) => ({
+    params: { slug: app.slug },
+    props: { app },
+  }));
+}
+
+interface Props {
+  app: AppEntry;
+}
+
+const { app } = Astro.props;
+
+// "More from Northland" — surface 3 other apps for cross-promo.
+const cross = apps
+  .filter((a) => a.slug !== app.slug)
+  .filter((a) => a.primaryCategory !== app.primaryCategory || a.slug.startsWith(app.slug.slice(0, 1)))
+  .slice(0, 3);
+
+const platformStr = app.platforms.join(' · ');
+const prevStr = app.previously?.length ? `Formerly: ${app.previously.join(', ')}` : null;
+---
+
+<BaseLayout
+  title={`${app.name} — Northland Studios`}
+  description={`${app.tagline}. ${app.cardBlurb}`}
+  ogImage={app.icon}
+>
+  <Nav />
+
+  <main id="main">
+    {/* ─────────── App hero ─────────── */}
+    <header class="app-hero">
+      <div class="app-hero-inner">
+        <div class="mono crumbs">
+          <a href="/">Northland</a>
+          <span class="sep">›</span>
+          <a href="/#trails">Apps</a>
+          <span class="sep">›</span>
+          <span>{app.name}</span>
+        </div>
+
+        <div class="app-hero-grid">
+          <div class="app-icon-large">
+            <img src={app.icon} alt={`${app.name} app icon`} width="200" height="200" />
+          </div>
+
+          <div class="app-hero-text">
+            <div class="mono trail">Trail · {app.trailNumber} — {app.primaryCategory}</div>
+            <h1 class="app-name">{app.name}</h1>
+            <p class="app-tagline">{app.tagline}</p>
+            {prevStr && <p class="mono prev">{prevStr}</p>}
+
+            <div class="chips">
+              {app.categories.map((c) => <span class="chip">{c}</span>)}
+              {app.platforms.map((p) => <span class="chip platform">{p}</span>)}
+            </div>
+
+            <div class="store-row">
+              <AppStoreBadge store={app.appStore} appName={app.name} />
+              <StoreRating store={app.appStore} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    {/* ─────────── Blurb + screenshots ─────────── */}
+    <section class="app-section">
+      <div class="blurb">
+        <p class="lead">{app.blurb}</p>
+        {app.story && (
+          <>
+            <div class="mono label">§ The story</div>
+            <p class="story">{app.story}</p>
+          </>
+        )}
+      </div>
+    </section>
+
+    <section class="app-section shots-section">
+      <div class="mono label centered">§ Screens</div>
+      <ScreenshotStrip slug={app.slug} screenshots={app.screenshots} feature={true} />
+    </section>
+
+    {/* ─────────── Spec ─────────── */}
+    <section class="app-section spec-section">
+      <div class="spec-grid">
+        {app.pricing && (
+          <div class="spec">
+            <div class="mono label">Pricing</div>
+            <div class="v">{app.pricing}</div>
+          </div>
+        )}
+        <div class="spec">
+          <div class="mono label">Platforms</div>
+          <div class="v">{platformStr}</div>
+        </div>
+        {app.techCredit && (
+          <div class="spec">
+            <div class="mono label">Built with</div>
+            <div class="v small">{app.techCredit}</div>
+          </div>
+        )}
+        {app.appStore.expectedRelease && !app.appStore.url && (
+          <div class="spec">
+            <div class="mono label">Expected</div>
+            <div class="v">{app.appStore.expectedRelease}</div>
+          </div>
+        )}
+      </div>
+    </section>
+
+    {/* ─────────── More from Northland ─────────── */}
+    {cross.length > 0 && (
+      <section class="app-section more-section">
+        <div class="section-header">
+          <div>
+            <div class="mono label">§ More from Northland</div>
+            <h2>Adjacent trails.</h2>
+          </div>
+          <p class="lede">Other apps in the park, made by the same person.</p>
+        </div>
+        <div class="more-grid">
+          {cross.map((a) => <AppCard app={a} variant="standard" />)}
+        </div>
+        <div class="back-link">
+          <a class="cta-back" href="/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="12 19 5 12 12 5" /><line x1="19" y1="12" x2="5" y2="12" />
+            </svg>
+            <span>Back to all trails</span>
+          </a>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ─── Hero ─── */
+  .app-hero {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+  .app-hero-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: clamp(40px, 6vh, 64px) var(--pad-page) clamp(60px, 10vh, 88px);
+  }
+  .crumbs { color: var(--ink-muted); margin-bottom: 32px; }
+  .crumbs a:hover { color: var(--accent); }
+  .crumbs .sep { margin: 0 8px; opacity: 0.6; }
+
+  .app-hero-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .app-icon-large img {
+    width: 200px;
+    height: 200px;
+    border-radius: 46px;
+    box-shadow: 0 4px 20px -10px rgba(28, 42, 32, 0.4),
+                0 30px 60px -30px rgba(28, 42, 32, 0.5);
+  }
+
+  .trail { color: var(--ink-muted); margin-bottom: 14px; }
+  .app-name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px 0;
+  }
+  .app-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 30px);
+    color: var(--ink-secondary);
+    margin: 0 0 8px 0;
+    line-height: 1.25;
+    max-width: 30ch;
+  }
+  .prev { color: var(--ink-muted); margin: 0 0 22px 0; }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .chip.platform {
+    background: transparent;
+    border: 1px solid var(--rule-strong);
+    color: var(--ink-secondary);
+  }
+
+  .store-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  /* ─── Sections ─── */
+  .app-section {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: clamp(60px, 10vh, 96px) var(--pad-page);
+  }
+  .app-section.shots-section { background: var(--bg); padding-top: 0; }
+  .app-section.spec-section { background: var(--bg); border-top: 1px solid var(--rule); padding-top: clamp(48px, 8vh, 72px); padding-bottom: clamp(48px, 8vh, 72px); }
+  .app-section.more-section { background: var(--bg-soft); max-width: none; border-top: 1px solid var(--rule); }
+  .app-section.more-section > * { max-width: var(--col-max); margin-inline: auto; }
+
+  .blurb { max-width: 60ch; }
+  .blurb .lead {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink-primary);
+    margin: 0 0 36px 0;
+  }
+  .blurb .label { color: var(--accent); margin-bottom: 10px; }
+  .blurb .story {
+    font-size: 17px;
+    color: var(--ink-secondary);
+    line-height: 1.66;
+    margin: 0;
+  }
+
+  .label.centered {
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: clamp(24px, 4vw, 40px);
+  }
+  .spec .label { color: var(--ink-muted); margin-bottom: 8px; }
+  .spec .v {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--ink-primary);
+  }
+  .spec .v.small { font-size: 16px; font-style: normal; font-family: var(--font-mono); color: var(--ink-secondary); letter-spacing: 0.04em; }
+
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(18px, 2vw, 26px);
+    margin-bottom: 48px;
+  }
+  .back-link { display: flex; justify-content: center; }
+  .cta-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-secondary);
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+  }
+  .cta-back:hover { color: var(--accent); border-color: var(--accent); }
+  .cta-back svg { width: 14px; height: 14px; }
+
+  @media (max-width: 740px) {
+    .app-hero-grid { grid-template-columns: 1fr; gap: 24px; }
+    .app-icon-large img { width: 140px; height: 140px; border-radius: 32px; }
+  }
+</style>

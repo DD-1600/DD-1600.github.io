@@ -1,0 +1,144 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import Blaze from '@components/Blaze.astro';
+---
+
+<BaseLayout
+  title="Contact — Northland Studios"
+  description="Get in touch with Northland Studios. hi@northland.studio for general inquiries; press kit available separately."
+>
+  <Nav />
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <Blaze size={48} tone="forest" fg="bone" />
+        <div class="mono label">§ Contact</div>
+        <h1>The trailhead office.</h1>
+        <p class="lede">
+          Email is the front door. We answer everything that isn't spam, usually within
+          a few days. Press inquiries are welcome; we keep a press kit ready to grab.
+        </p>
+      </div>
+    </header>
+
+    <section class="section narrow">
+      <dl class="contact-list">
+        <div>
+          <dt class="mono label">General</dt>
+          <dd>
+            <a class="contact-link" href="mailto:hi@northland.studio">hi@northland.studio</a>
+            <span class="hint">Anything to do with the studio or the apps.</span>
+          </dd>
+        </div>
+        <div>
+          <dt class="mono label">Press</dt>
+          <dd>
+            <a class="contact-link" href="mailto:press@northland.studio">press@northland.studio</a>
+            <span class="hint">Or grab the press kit directly: <a class="inline" href="/press">/press</a></span>
+          </dd>
+        </div>
+        <div>
+          <dt class="mono label">Support</dt>
+          <dd>
+            <a class="contact-link" href="mailto:support@northland.studio">support@northland.studio</a>
+            <span class="hint">Per-app support inquiries — include the app name and your iOS version.</span>
+          </dd>
+        </div>
+        <div>
+          <dt class="mono label">Social</dt>
+          <dd>
+            <a class="contact-link" href="https://x.com/northlandstudios" rel="noopener">@northlandstudios on X</a>
+            <span class="hint">Build-in-public; mostly Tuesday and Thursday mornings, central time.</span>
+          </dd>
+        </div>
+        <div>
+          <dt class="mono label">Mailing</dt>
+          <dd>
+            <span class="contact-link">Available on request</span>
+            <span class="hint">For physical press kits, swag returns, and the very rare cease-and-desist.</span>
+          </dd>
+        </div>
+      </dl>
+
+      <p class="signoff serif">
+        Open all seasons. Replies travel at the pace of a one-person studio &mdash;
+        usually a couple of days, occasionally a week, never never.
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-hero-inner {
+    max-width: var(--col-narrow);
+    margin: 0 auto;
+    padding: clamp(60px, 10vh, 100px) var(--pad-page);
+  }
+  .page-hero .label { color: var(--accent); margin: 20px 0 16px 0; }
+  .page-hero h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+    margin: 0 0 24px 0;
+    color: var(--ink-primary);
+  }
+  .page-hero .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  .contact-list {
+    margin: 0 0 60px 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .contact-list > div {
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .contact-list > div:last-child { border-bottom: none; }
+  .contact-list dt { color: var(--accent); margin-bottom: 8px; }
+  .contact-list dd {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .contact-link {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 28px);
+    color: var(--ink-primary);
+    line-height: 1.2;
+  }
+  a.contact-link:hover { color: var(--accent); }
+  .hint {
+    font-size: 15px;
+    color: var(--ink-secondary);
+    line-height: 1.5;
+  }
+  .inline { color: var(--accent); }
+
+  .signoff {
+    font-size: 19px;
+    color: var(--ink-secondary);
+    margin: 0;
+    max-width: 60ch;
+  }
+</style>

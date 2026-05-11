@@ -1,0 +1,300 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import Blaze from '@components/Blaze.astro';
+import { apps } from '@data/apps';
+---
+
+<BaseLayout
+  title="Press kit — Northland Studios"
+  description="Press kit for Northland Studios. Logo lockups, color palette, per-app assets, studio bio."
+>
+  <Nav />
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <Blaze size={48} tone="forest" fg="bone" />
+        <div class="mono label">§ Press kit</div>
+        <h1>Field guide<br />for the&nbsp;press.</h1>
+        <p class="lede">
+          Logo lockups, palette, studio bio, per-app assets. Everything in one place.
+          For interview requests or asset variants we don't have here, write
+          <a href="mailto:press@northland.studio">press@northland.studio</a>.
+        </p>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="mono label">§ The studio in one paragraph</div>
+      <p class="bio">
+        Northland Studios is a small, solo iOS app shop in the north woods of the internet.
+        One person, many small apps — games, utilities, family software, weather, and
+        faith — published quarterly under one signage system. The studio is the park;
+        the apps are the trails.
+      </p>
+      <p class="bio quote">
+        <em>“One person makes the trails. The signs all match. The trails do not.”</em>
+      </p>
+      <button class="copy-btn mono" data-copy="bio">Copy studio bio</button>
+    </section>
+
+    <section class="section">
+      <div class="mono label">§ Identity</div>
+      <div class="identity-grid">
+        <div class="card">
+          <div class="mono small">The mark</div>
+          <div class="blaze-frame forest">
+            <Blaze size={80} tone="forest" fg="bone" />
+          </div>
+          <p class="cap">The N-blaze, forest on bone (default).</p>
+        </div>
+        <div class="card">
+          <div class="mono small">Reversed</div>
+          <div class="blaze-frame bone">
+            <Blaze size={80} tone="bone" fg="forest" />
+          </div>
+          <p class="cap">Bone on forest (for dark surfaces).</p>
+        </div>
+        <div class="card">
+          <div class="mono small">Rescue</div>
+          <div class="blaze-frame rescue">
+            <Blaze size={80} tone="rescue" fg="bone" />
+          </div>
+          <p class="cap">Bone on rescue (high-energy variant).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mono label">§ Palette</div>
+      <div class="swatches">
+        <div class="sw"><div class="chip-color" style="background:#1C2A20"></div><span class="name">Forest</span><span class="hex mono">#1C2A20</span></div>
+        <div class="sw"><div class="chip-color" style="background:#3F6147"></div><span class="name">Pine</span><span class="hex mono">#3F6147</span></div>
+        <div class="sw"><div class="chip-color" style="background:#7A8E6A"></div><span class="name">Moss</span><span class="hex mono">#7A8E6A</span></div>
+        <div class="sw"><div class="chip-color" style="background:#C8531C"></div><span class="name">Rescue</span><span class="hex mono">#C8531C</span></div>
+        <div class="sw"><div class="chip-color" style="background:#9C3E15"></div><span class="name">Rust</span><span class="hex mono">#9C3E15</span></div>
+        <div class="sw"><div class="chip-color" style="background:#F1EDE4;border:1px solid #C9C0AB;"></div><span class="name">Bone</span><span class="hex mono">#F1EDE4</span></div>
+        <div class="sw"><div class="chip-color" style="background:#E6E0D2;border:1px solid #C9C0AB;"></div><span class="name">Paper</span><span class="hex mono">#E6E0D2</span></div>
+        <div class="sw"><div class="chip-color" style="background:#A89A78"></div><span class="name">Sand</span><span class="hex mono">#A89A78</span></div>
+        <div class="sw"><div class="chip-color" style="background:#0E140F"></div><span class="name">Ink</span><span class="hex mono">#0E140F</span></div>
+        <div class="sw"><div class="chip-color" style="background:#5A7C8E"></div><span class="name">Sky</span><span class="hex mono">#5A7C8E</span></div>
+        <div class="sw"><div class="chip-color" style="background:#DCD0B4;border:1px solid #C9C0AB;"></div><span class="name">Birch</span><span class="hex mono">#DCD0B4</span></div>
+        <div class="sw"><div class="chip-color" style="background:#43342A"></div><span class="name">Bark</span><span class="hex mono">#43342A</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mono label">§ Typography</div>
+      <div class="type-grid">
+        <div>
+          <div class="mono small">Voice (italic)</div>
+          <p class="type-sample serif">A small studio in the north woods of the internet.</p>
+          <p class="type-meta">Instrument Serif · italic</p>
+        </div>
+        <div>
+          <div class="mono small">Headlines &amp; body</div>
+          <p class="type-sample sans">Fourteen small apps, made by one person.</p>
+          <p class="type-meta">Geist · 400 / 500 / 600</p>
+        </div>
+        <div>
+          <div class="mono small">Labels &amp; captions</div>
+          <p class="type-sample mono">EST. 2026 · OPEN ALL SEASONS</p>
+          <p class="type-meta">Geist Mono · 500</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mono label">§ Per-app assets</div>
+      <p class="meta">App icons (1024×1024 PNG), expected release window, primary category, and a one-line tagline. For full screenshots, contact press.</p>
+      <div class="app-asset-grid">
+        {apps.map((app) => (
+          <a class="app-asset" href={`/apps/${app.slug}`}>
+            <div class="ic">
+              <img src={app.icon} alt={`${app.name} icon`} width="64" height="64" loading="lazy" />
+            </div>
+            <div class="ic-meta">
+              <div class="ic-name">{app.name}</div>
+              <div class="mono ic-cat">{app.primaryCategory}{app.appStore.expectedRelease ? ` · ${app.appStore.expectedRelease}` : ''}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="mono label">§ Contact</div>
+      <p>
+        <a class="contact-link" href="mailto:press@northland.studio">press@northland.studio</a>
+      </p>
+      <p class="meta">For interview requests, allow up to a week for a reply. We answer everything that isn't spam.</p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const txt = `Northland Studios is a small, solo iOS app shop in the north woods of the internet. One person, many small apps — games, utilities, family software, weather, and faith — published quarterly under one signage system. The studio is the park; the apps are the trails.\n\n"One person makes the trails. The signs all match. The trails do not."`;
+      navigator.clipboard?.writeText(txt).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied ✓';
+        setTimeout(() => (btn.textContent = orig || 'Copy studio bio'), 1800);
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-hero {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-hero-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: clamp(60px, 10vh, 100px) var(--pad-page);
+  }
+  .page-hero .label { color: var(--accent); margin: 20px 0 16px 0; }
+  .page-hero h1 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.05;
+    margin: 0 0 24px 0;
+  }
+  .page-hero .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .page-hero a { color: var(--accent); }
+
+  .section { padding-top: clamp(60px, 8vh, 96px); padding-bottom: clamp(60px, 8vh, 96px); }
+  .section .label {
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .small { color: var(--ink-muted); margin-bottom: 12px; display: block; }
+
+  .bio {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 28px);
+    color: var(--ink-primary);
+    line-height: 1.4;
+    max-width: 60ch;
+  }
+  .bio.quote { font-size: 19px; color: var(--ink-secondary); }
+  .copy-btn {
+    background: transparent;
+    color: var(--ink-secondary);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 8px 14px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: border-color 160ms ease, color 160ms ease;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .identity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .blaze-frame {
+    margin: 18px 0;
+    padding: 32px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  .blaze-frame.forest { background: var(--forest); }
+  .blaze-frame.bone   { background: var(--bone); border: 1px solid var(--rule); }
+  .blaze-frame.rescue { background: var(--rescue); }
+  .cap {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .sw {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .chip-color {
+    width: 100%;
+    height: 56px;
+    border-radius: 8px;
+  }
+  .name { font-weight: 600; }
+  .hex { color: var(--ink-muted); font-size: 11px; }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  @media (min-width: 740px) {
+    .type-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .type-sample { margin: 0 0 8px 0; }
+  .type-sample.serif { font-family: var(--font-serif); font-style: italic; font-size: 26px; line-height: 1.25; color: var(--ink-primary); }
+  .type-sample.sans  { font-family: var(--font-sans); font-weight: 500; font-size: 22px; color: var(--ink-primary); }
+  .type-sample.mono  { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-primary); }
+  .type-meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .app-asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .app-asset {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    transition: border-color 160ms ease, background 160ms ease;
+  }
+  .app-asset:hover { border-color: var(--accent); }
+  .ic img {
+    width: 64px; height: 64px;
+    border-radius: 14px;
+    object-fit: cover;
+    display: block;
+  }
+  .ic-name { font-weight: 600; color: var(--ink-primary); }
+  .ic-cat { color: var(--ink-muted); margin-top: 4px; }
+
+  .contact-link {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 28px;
+    color: var(--accent);
+  }
+  .meta { color: var(--ink-muted); font-size: 14px; }
+</style>

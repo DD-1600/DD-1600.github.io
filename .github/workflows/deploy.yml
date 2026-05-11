@@ -1,0 +1,65 @@
+# Northland Studios — deploy to GitHub Pages
+#
+# Trigger: push to main. Builds Astro and publishes the dist/ output to GitHub Pages.
+# Uses the official actions/deploy-pages flow (recommended over the legacy gh-pages branch).
+#
+# For DON'T-AUTO-MERGE compliance: this workflow does NOT push to main on its own.
+# It only deploys when a human (Daniel) pushes/merges to main.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Allow manual runs from the Actions tab
+  workflow_dispatch:
+
+# Allow this workflow to push to Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Avoid stacked deploys; keep the latest one
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        env:
+          # Override in repo Variables when DNS binds:
+          #   NORTHLAND_SITE_URL = https://northland.studio
+          NORTHLAND_SITE_URL: ${{ vars.NORTHLAND_SITE_URL || 'https://dd-1600.github.io' }}
+        run: npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,118 @@
+---
+/**
+ * ScreenshotStrip — placeholder screen frames with hover-to-preview.
+ *
+ * Renders 3–4 phone-shaped tiles labeled with the screen name. When real
+ * screenshots are dropped into /public/screenshots/<slug>/01.png etc., this
+ * will pick them up via `realScreenshots`.
+ */
+interface Props {
+  slug: string;
+  screenshots: { label: string; alt: string }[];
+  /** If true, render large feature mode (taller, single row of 3 large frames). */
+  feature?: boolean;
+  /** Try to load real screenshots from /screenshots/<slug>/0N.png; falls back to labeled blanks. */
+  hasRealScreenshots?: boolean;
+}
+
+const { slug, screenshots, feature = false, hasRealScreenshots = false } = Astro.props;
+---
+
+<div class:list={['shots', { feature }]} data-slug={slug}>
+  {screenshots.map((s, i) => (
+    <figure class="shot" tabindex="0">
+      {hasRealScreenshots ? (
+        <img
+          src={`/screenshots/${slug}/${String(i + 1).padStart(2, '0')}.png`}
+          alt={s.alt}
+          loading="lazy"
+          width="290"
+          height="630"
+        />
+      ) : (
+        <span class="placeholder" aria-hidden="true"></span>
+      )}
+      <figcaption class="mono">{s.label}</figcaption>
+    </figure>
+  ))}
+</div>
+
+<script>
+  // Hover-to-preview: scale the shot under the cursor, dim the rest.
+  document.querySelectorAll<HTMLElement>('.shots').forEach((group) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    const shots = Array.from(group.querySelectorAll<HTMLElement>('.shot'));
+    if (!shots.length) return;
+    group.addEventListener('mousemove', (e) => {
+      const rect = group.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      const idx = Math.min(shots.length - 1, Math.max(0, Math.floor(ratio * shots.length)));
+      shots.forEach((s, i) => {
+        s.classList.toggle('hover-active', i === idx);
+      });
+    });
+    group.addEventListener('mouseleave', () => {
+      shots.forEach((s) => s.classList.remove('hover-active'));
+    });
+  });
+</script>
+
+<style>
+  .shots {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .shots.feature {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .shot {
+    margin: 0;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 14px;
+    border: 1px solid var(--rule);
+    background:
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--bg-shot) 70%, var(--bone)) 0%,
+        var(--bg-shot) 100%);
+    position: relative;
+    overflow: hidden;
+    transition: transform 220ms ease, filter 220ms ease, opacity 220ms ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .shot img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .shot .placeholder {
+    flex: 1;
+    margin: 12px 12px 28px;
+    border: 1px dashed var(--sand);
+    border-radius: 8px;
+    opacity: 0.55;
+  }
+  .shot figcaption {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 10px;
+    text-align: center;
+    color: var(--ink-muted);
+    font-size: 9.5px;
+  }
+  .shot:hover, .shot.hover-active, .shot:focus-visible {
+    transform: scale(1.04);
+    outline: none;
+  }
+  .shots:hover .shot:not(.hover-active) {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 700px) {
+    .shots { grid-template-columns: repeat(2, 1fr); }
+    .shots.feature { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

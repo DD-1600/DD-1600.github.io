@@ -1,0 +1,60 @@
+---
+import Blaze from '@components/Blaze.astro';
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="foot-inner">
+    <div class="legend">
+      <Blaze size={26} tone="currentColor" fg="bone" />
+      <div class="legend-text mono">
+        Northland Studios · Est. 2026<br />
+        <span class="m">hi@northland.studio</span>
+      </div>
+    </div>
+    <div class="right mono">
+      <a href="/press">Press kit</a>
+      <a href="/rss.xml">RSS</a>
+      <a href="https://x.com/northlandstudios" rel="noopener">@northlandstudios</a>
+    </div>
+  </div>
+  <div class="legal mono">
+    © {year} Northland Studios · Park ranger · sole proprietor · Open all seasons
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--rule);
+    background: var(--bg);
+    color: var(--ink-primary);
+  }
+  .foot-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: 36px var(--pad-page) 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .legend-text { color: var(--ink-primary); line-height: 1.6; }
+  .legend-text .m { color: var(--ink-muted); }
+  .right { display: flex; gap: 20px; }
+  .right a { opacity: 0.72; }
+  .right a:hover { opacity: 1; color: var(--accent); }
+
+  .legal {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: 0 var(--pad-page) 36px;
+    color: var(--ink-muted);
+    font-size: 10.5px;
+  }
+</style>

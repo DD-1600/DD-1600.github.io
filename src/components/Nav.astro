@@ -1,0 +1,106 @@
+---
+import Blaze from '@components/Blaze.astro';
+import ThemeToggle from '@components/ThemeToggle.astro';
+
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+function active(path: string) {
+  if (path === '/') return here === '/';
+  return here === path || here.startsWith(path + '/');
+}
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand-lockup" href="/" aria-label="Northland Studios — home">
+      <Blaze size={28} tone="currentColor" fg="bone" />
+      <span class="wordmark">Northland<span class="sep">·</span>Studios</span>
+    </a>
+
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="/" class:list={['nav-link', { active: active('/') }]}>Apps</a>
+        <a href="/about" class:list={['nav-link', { active: active('/about') }]}>About</a>
+        <a href="/press" class:list={['nav-link', { active: active('/press') }]}>Press</a>
+        <a href="/contact" class:list={['nav-link', { active: active('/contact') }]}>Contact</a>
+      </div>
+      <ThemeToggle />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: 16px var(--pad-page);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink-primary);
+  }
+  .brand-lockup:hover { color: var(--ink-primary); }
+  .wordmark {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .wordmark .sep {
+    color: var(--ink-muted);
+    margin: 0 6px;
+    font-weight: 400;
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav-link {
+    opacity: 0.78;
+    transition: opacity 160ms ease, color 160ms ease;
+    position: relative;
+    padding: 6px 0;
+  }
+  .nav-link:hover { opacity: 1; color: var(--accent); }
+  .nav-link.active {
+    opacity: 1;
+    color: var(--accent);
+  }
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  @media (max-width: 760px) {
+    .nav-links { display: none; }
+  }
+</style>

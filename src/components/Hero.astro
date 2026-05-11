@@ -1,0 +1,143 @@
+---
+import Blaze from '@components/Blaze.astro';
+import TopoBackdrop from '@components/TopoBackdrop.astro';
+import { apps } from '@data/apps';
+
+const trailCount = apps.length;
+const categoryDisplay = ['Games', 'Family', 'Productivity', 'Faith', 'Utility'].join(' · ');
+---
+
+<header class="hero">
+  <TopoBackdrop />
+  <div class="hero-inner">
+    <div class="hero-eyebrow mono">
+      <Blaze size={16} tone="rescue" fg="bone" />
+      <span>Est. 2026</span>
+      <span class="dot">·</span>
+      <span>Open all seasons</span>
+      <span class="dot">·</span>
+      <span>Publishing apps quarterly</span>
+    </div>
+
+    <h1 class="hero-wordmark">
+      Northland
+      <span class="lf-2">Studios<span class="blaze-anchor">▲</span></span>
+    </h1>
+
+    <p class="hero-tag">
+      A small studio in the&nbsp;north woods of the&nbsp;internet.
+    </p>
+
+    <p class="hero-body">
+      One person, many small apps. Games, utilities, niche and weird stuff.
+      Each app is a trail. The studio is the park around them.
+    </p>
+
+    <div class="hero-meta mono">
+      <div class="item"><span>Trails open</span><span class="v">{trailCount}</span></div>
+      <div class="item"><span>Categories</span><span class="v">{categoryDisplay}</span></div>
+      <div class="item"><span>Park ranger</span><span class="v">sole proprietor</span></div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Gentle parallax — topo lines drift up at 0.18x scroll velocity.
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const topo = document.getElementById('topo');
+    if (!topo) return;
+    let raf: number | null = null;
+    function update() {
+      const y = window.scrollY;
+      topo.style.transform = `translate3d(0, ${y * 0.18}px, 0)`;
+      raf = null;
+    }
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (raf) return;
+        raf = requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+  })();
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    background: var(--hero-bg);
+    color: var(--hero-ink);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .hero-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: clamp(80px, 14vh, 160px) var(--pad-page) clamp(96px, 18vh, 200px);
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    color: rgba(241, 237, 228, 0.6);
+    margin-bottom: 28px;
+    display: inline-flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .hero-eyebrow .dot { color: var(--accent); }
+
+  .hero-wordmark {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(64px, 13vw, 168px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin: 0 0 36px 0;
+    text-transform: uppercase;
+  }
+  .hero-wordmark .lf-2 { display: block; }
+  .hero-wordmark .blaze-anchor {
+    color: var(--accent);
+    display: inline-block;
+    transform: translateY(-0.16em);
+    margin-left: 0.18em;
+    font-size: 0.66em;
+  }
+
+  .hero-tag {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(24px, 3.6vw, 40px);
+    font-weight: 400;
+    line-height: 1.25;
+    max-width: 22ch;
+    margin: 0 0 20px 0;
+    color: rgba(241, 237, 228, 0.94);
+  }
+  .hero-body {
+    max-width: 48ch;
+    color: rgba(241, 237, 228, 0.7);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 40px 0;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    color: rgba(241, 237, 228, 0.5);
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px solid var(--hero-rule);
+  }
+  .hero-meta .item { display: flex; flex-direction: column; gap: 6px; }
+  .hero-meta .item .v {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--bone);
+  }
+</style>

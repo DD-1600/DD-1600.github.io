@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import Blaze from '@components/Blaze.astro';
+---
+
+<BaseLayout
+  title="404 — Off the trail"
+  description="This page is off the trail. Head back to the trailhead."
+>
+  <Nav />
+
+  <main id="main" class="four-oh-four">
+    <div class="frame">
+      <Blaze size={56} tone="rescue" fg="bone" />
+      <div class="mono label">§ 404</div>
+      <h1>Off the trail.</h1>
+      <p class="lede">
+        This page isn't on any of our maps. Maybe the URL was mistyped,
+        maybe a trail was renamed, maybe we never blazed this one.
+      </p>
+      <div class="cta-row">
+        <a class="cta primary" href="/">Back to the trailhead</a>
+        <a class="cta" href="/#trails">See all trails</a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .four-oh-four {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px var(--pad-page);
+  }
+  .frame {
+    max-width: 540px;
+    text-align: center;
+  }
+  .label { color: var(--accent); margin: 22px 0 14px 0; }
+  h1 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.05;
+    margin: 0 0 18px 0;
+  }
+  .lede {
+    color: var(--ink-secondary);
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 0 32px 0;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    color: var(--ink-primary);
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+  }
+  .cta.primary { background: var(--ink-primary); color: var(--bg); border-color: var(--ink-primary); }
+  .cta:hover { background: var(--accent); color: var(--bone); border-color: var(--accent); }
+</style>

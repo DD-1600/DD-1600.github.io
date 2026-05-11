@@ -1,0 +1,97 @@
+---
+/**
+ * StoreRating — lazily fetches App Store rating via the iTunes Lookup API.
+ *
+ * Free, no auth, no key. Works from a static page because the call happens
+ * client-side after hydration. Falls back to "Coming soon" if no `appStoreId`.
+ *
+ * iTunes Lookup endpoint:
+ *   https://itunes.apple.com/lookup?id={id}&country=us
+ * Response includes `averageUserRating` and `userRatingCount`.
+ */
+import type { AppStoreInfo } from '@data/apps';
+
+interface Props {
+  store: AppStoreInfo;
+}
+const { store } = Astro.props;
+---
+
+<div
+  class="store-rating"
+  data-app-store-id={store.id || ''}
+>
+  {store.id ? (
+    <span class="placeholder mono">★ ★ ★ ★ ★ — Loading…</span>
+  ) : (
+    <span class="coming mono">★ ★ ★ ★ ★ — Coming soon</span>
+  )}
+</div>
+
+<script>
+  // Lazy-init: when a rating widget enters viewport, fetch its app's data.
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    const widgets = document.querySelectorAll('.store-rating[data-app-store-id]');
+    if (!widgets.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          io.unobserve(el);
+          const id = el.dataset.appStoreId;
+          if (!id) return;
+          fetchRating(id, el);
+        });
+      },
+      { rootMargin: '120px' }
+    );
+
+    widgets.forEach((w) => io.observe(w));
+
+    async function fetchRating(id: string, el: HTMLElement) {
+      try {
+        // Use iTunes Search API (returns CORS-friendly JSON)
+        const url = `https://itunes.apple.com/lookup?id=${encodeURIComponent(id)}&country=us`;
+        const res = await fetch(url, { mode: 'cors' });
+        if (!res.ok) throw new Error('lookup failed');
+        const data = await res.json();
+        const result = data?.results?.[0];
+        if (!result || typeof result.averageUserRating !== 'number') {
+          renderError(el, 'No ratings yet');
+          return;
+        }
+        const avg = result.averageUserRating as number;
+        const count = (result.userRatingCount as number) || 0;
+        renderRating(el, avg, count);
+      } catch (err) {
+        renderError(el, 'Could not load rating');
+      }
+    }
+
+    function renderRating(el: HTMLElement, avg: number, count: number) {
+      const rounded = Math.round(avg * 10) / 10;
+      const full = Math.floor(avg);
+      const hasHalf = avg - full >= 0.5;
+      const stars = '★'.repeat(full) + (hasHalf ? '½' : '') + '☆'.repeat(5 - full - (hasHalf ? 1 : 0));
+      el.innerHTML = `<span class="live mono">${stars}&nbsp;&nbsp;${rounded}&nbsp;·&nbsp;${count.toLocaleString()} ratings</span>`;
+    }
+
+    function renderError(el: HTMLElement, msg: string) {
+      el.innerHTML = `<span class="coming mono">★ ★ ★ ★ ★ — ${msg}</span>`;
+    }
+  })();
+</script>
+
+<style>
+  .store-rating {
+    display: inline-block;
+    color: var(--ink-muted);
+  }
+  .store-rating :global(.live) {
+    color: var(--ink-primary);
+  }
+  .placeholder, .coming { opacity: 0.7; }
+</style>

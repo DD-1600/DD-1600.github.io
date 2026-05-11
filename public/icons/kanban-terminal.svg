@@ -1,0 +1,30 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mac-ish gradient + paper hue, hinting at terminals on a board -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1C2A20"/>
+      <stop offset="1" stop-color="#0E140F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#g)"/>
+  <!-- three Kanban columns -->
+  <g fill="#F1EDE4" fill-opacity="0.92">
+    <rect x="140" y="220" width="220" height="580" rx="20"/>
+    <rect x="402" y="220" width="220" height="580" rx="20"/>
+    <rect x="664" y="220" width="220" height="580" rx="20"/>
+  </g>
+  <!-- terminal carets / cards -->
+  <g fill="#1C2A20">
+    <rect x="170" y="260" width="160" height="74" rx="8"/>
+    <rect x="170" y="354" width="160" height="74" rx="8"/>
+    <rect x="170" y="448" width="160" height="74" rx="8"/>
+    <rect x="432" y="260" width="160" height="74" rx="8"/>
+    <rect x="432" y="354" width="160" height="74" rx="8"/>
+    <rect x="694" y="260" width="160" height="74" rx="8"/>
+  </g>
+  <!-- rescue accent on middle column header (active card with terminal) -->
+  <rect x="432" y="260" width="160" height="74" rx="8" fill="#C8531C"/>
+  <!-- terminal caret in middle -->
+  <path d="M460 286 L495 312 L460 338 Z" fill="#F1EDE4"/>
+  <rect x="510" y="305" width="60" height="14" rx="3" fill="#F1EDE4"/>
+</svg>

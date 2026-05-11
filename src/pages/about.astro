@@ -1,0 +1,203 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+import Blaze from '@components/Blaze.astro';
+---
+
+<BaseLayout
+  title="About — Northland Studios"
+  description="A small studio in the north woods of the internet. One person, many small apps, open all seasons."
+>
+  <Nav />
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <Blaze size={56} tone="forest" fg="bone" />
+        <div class="mono label">§ About</div>
+        <h1>
+          <span class="serif">A small studio in&nbsp;the north woods</span>
+          <span class="of">of the internet.</span>
+        </h1>
+        <p class="lede">
+          Northland Studios is the parent brand for a solo iOS app practice.
+          One person, many small apps — games, utilities, niche and weird&nbsp;stuff.
+          Each app is a trail. The studio is the park around&nbsp;them.
+        </p>
+      </div>
+    </header>
+
+    <section class="section narrow">
+      <div class="mono label">§ Mission</div>
+      <p>
+        We build small, carefully made iOS apps for people who want their phone
+        to feel made by a person, not a committee. One person. Many small apps.
+        Open year-round.
+      </p>
+
+      <div class="mono label">§ Principles</div>
+      <ol class="principles">
+        <li>
+          <strong>Small things, made well.</strong> Each app does one thing,
+          carefully. We don't chase scope; we chase craft.
+        </li>
+        <li>
+          <strong>Open all seasons.</strong> Publishing apps quarterly, not in
+          launch-spike bursts. We'll still be here next year.
+        </li>
+        <li>
+          <strong>The studio is the asset.</strong> No single app has to be a hit
+          because the park is the product. The brand is the long-lived thing.
+        </li>
+        <li>
+          <strong>Made by hand.</strong> Topo lines, mono labels, italic-serif
+          voice — every artifact reads as <em>made by a person</em>.
+        </li>
+        <li>
+          <strong>Family-friendly, ad-free.</strong> No microtransactions,
+          no telemetry beyond what the OS gives us. We don't read your
+          messages. We don't sell anything but the apps themselves.
+        </li>
+      </ol>
+
+      <div class="mono label">§ Cadence</div>
+      <p>
+        <span class="serif-em">One person makes the trails. The signs all match. The trails do&nbsp;not.</span>
+      </p>
+      <p>
+        New trails open when there's something real to show. Old trails stay
+        walkable — we don't sunset what people are using, and we don't ghost a
+        release after the launch week.
+      </p>
+
+      <div class="mono label">§ Who's behind it</div>
+      <p>
+        Northland Studios is a solo, family-driven shop. A park ranger and sole
+        proprietor, working from a place that feels like the north woods of the
+        internet. Press kit and contact links below.
+      </p>
+    </section>
+
+    <section class="section narrow contact-strip">
+      <div class="cta-row">
+        <a class="cta primary" href="/contact">
+          <span>Get in touch</span>
+        </a>
+        <a class="cta" href="/press">
+          <span>Press kit</span>
+        </a>
+        <a class="cta" href="/#trails">
+          <span>See the trails</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-hero-inner {
+    max-width: var(--col-narrow);
+    margin: 0 auto;
+    padding: clamp(60px, 10vh, 100px) var(--pad-page);
+  }
+  .page-hero .label { color: var(--accent); margin: 24px 0 16px 0; }
+  .page-hero h1 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.012em;
+    margin: 0 0 28px 0;
+  }
+  .page-hero h1 .serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    display: block;
+  }
+  .page-hero h1 .of { display: block; color: var(--accent); margin-top: 6px; }
+  .page-hero .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  .section.narrow { padding-top: clamp(50px, 6vh, 80px); padding-bottom: clamp(50px, 6vh, 80px); }
+  .section .label {
+    color: var(--accent);
+    margin: 36px 0 14px 0;
+  }
+  .section .label:first-child { margin-top: 0; }
+  .section p {
+    font-size: 17.5px;
+    line-height: 1.7;
+    color: var(--ink-secondary);
+    margin: 0 0 18px 0;
+    max-width: 62ch;
+  }
+  .serif-em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-primary);
+  }
+  .principles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: pri;
+  }
+  .principles li {
+    counter-increment: pri;
+    margin: 0 0 22px 0;
+    padding: 0 0 0 56px;
+    position: relative;
+    color: var(--ink-secondary);
+    font-size: 17px;
+    line-height: 1.66;
+    max-width: 62ch;
+  }
+  .principles li::before {
+    content: "0" counter(pri);
+    position: absolute;
+    left: 0; top: 1px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+  }
+  .principles li strong {
+    color: var(--ink-primary);
+    font-weight: 600;
+  }
+
+  .contact-strip { padding-top: 0; }
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 36px;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    color: var(--ink-primary);
+    transition: background 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+  .cta:hover { background: var(--accent); color: var(--bone); border-color: var(--accent); transform: translateY(-1px); }
+  .cta.primary { background: var(--ink-primary); color: var(--bg); border-color: var(--ink-primary); }
+  .cta.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bone); }
+</style>
