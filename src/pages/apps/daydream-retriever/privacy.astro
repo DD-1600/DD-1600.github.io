@@ -1,0 +1,138 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Nav from '@components/Nav.astro';
+import Footer from '@components/Footer.astro';
+---
+
+<BaseLayout
+  title="Daydream Retriever — Privacy Policy"
+  description="Privacy policy for Daydream Retriever, a hand-painted arcade flyer by Northland Studios. Data Not Collected."
+>
+  <Nav />
+
+  <main id="main">
+    <header class="page-hero">
+      <div class="page-hero-inner">
+        <div class="mono label">§ Daydream Retriever</div>
+        <h1>Privacy Policy</h1>
+        <p class="lede">Effective <strong>2026-05-12</strong>. Short version: nothing leaves your device. No analytics, no trackers, no SDKs.</p>
+      </div>
+    </header>
+
+    <section class="section narrow">
+      <p>
+        Daydream Retriever is published by Northland Studios. This policy explains what data the app collects, how it is used, and your choices.
+      </p>
+
+      <div class="mono label">§ Summary</div>
+      <ul>
+        <li>We do <strong>not</strong> collect any personal data.</li>
+        <li>We do <strong>not</strong> sell your data.</li>
+        <li>We do <strong>not</strong> track you across other apps or websites.</li>
+        <li>We do <strong>not</strong> use third-party analytics or advertising SDKs.</li>
+        <li>High scores and cosmetic unlocks live on your device and (optionally) sync via your private iCloud account.</li>
+      </ul>
+
+      <div class="mono label">§ What we collect</div>
+      <p>Per Apple's App Privacy framework, Daydream Retriever is filed as <strong>Data Not Collected</strong>. The app does not transmit user data to Northland Studios or any third party. The notes below describe the only ways data moves at all, all of which are Apple-mediated and account-private.</p>
+      <ul>
+        <li>
+          <strong>iCloud Key-Value sync (optional).</strong> If you're signed in to iCloud, game state — high scores, daily-run streaks, cosmetic unlocks — syncs across your devices via Apple's <em>NSUbiquitousKeyValueStore</em>. This is an Apple-managed, end-to-end-encrypted sync surface tied to your iCloud account. Northland Studios has no access to this data.
+        </li>
+        <li>
+          <strong>Purchases (optional tip jar).</strong> The optional tip jar uses Apple's StoreKit 2. Apple handles the entire transaction. Northland Studios sees only anonymized receipt data sufficient to verify a purchase — no name, no email, no payment details, no Apple ID.
+        </li>
+        <li>
+          <strong>Diagnostics.</strong> Crash logs and performance data may be sent to Apple's standard crash reporter <em>only</em> if you opted in to <em>Share With App Developers</em> in iOS Settings. These reports are aggregated by Apple and contain no personal information.
+        </li>
+        <li>
+          <strong>Identifiers.</strong> None. No IDFA. No cross-app identifier. No login.
+        </li>
+        <li>
+          <strong>HealthKit, Location, Camera, Contacts, Microphone, Photos.</strong> Not requested, not used.
+        </li>
+      </ul>
+
+      <div class="mono label">§ How we use it</div>
+      <p>
+        Game state powers your high scores, daily-run summaries, and cosmetic-unlock progression — all on-device. iCloud sync, where enabled, exists so your progress follows your Apple ID across iPhone and iPad. Tip-jar receipts unlock a small cosmetic supporter badge and nothing else. None of this data is used for advertising or analytics.
+      </p>
+
+      <div class="mono label">§ Data sharing</div>
+      <p>Daydream Retriever does not share data with third parties, except:</p>
+      <ul>
+        <li><strong>Apple</strong>, for App Store delivery, opt-in crash reports, in-app purchase processing, and iCloud Key-Value sync. All Apple-managed.</li>
+      </ul>
+      <p>We will only disclose data if required by law (e.g., a valid subpoena) and will notify you where legally permitted.</p>
+
+      <div class="mono label">§ Data retention</div>
+      <p>
+        Data stored on your device stays on your device until you delete it or uninstall the app. We do not maintain server-side copies. iCloud-synced data is retained by Apple under your iCloud account's terms; deleting Daydream Retriever from a device does not remove its iCloud KV records — you can clear them via <em>Settings &rarr; Apple ID &rarr; iCloud &rarr; Manage Account Storage</em>.
+      </p>
+
+      <div class="mono label">§ Your rights</div>
+      <ul>
+        <li>Delete all app data by uninstalling Daydream Retriever.</li>
+        <li>Clear iCloud-synced state via <em>Settings &rarr; Apple ID &rarr; iCloud &rarr; Manage Account Storage</em>.</li>
+        <li>Contact us at <a href="mailto:danieldavis16@gmail.com">danieldavis16@gmail.com</a> with any privacy question.</li>
+      </ul>
+      <p>If you're in the EU, UK, or California, you have additional rights under GDPR / UK GDPR / CCPA — contact us and we'll honor them. Because we don't transmit data off-device, most of these rights resolve to deleting the app.</p>
+
+      <div class="mono label">§ Children</div>
+      <p>
+        Daydream Retriever is not directed at children under 13 and does not knowingly collect data from them. If you believe a child has provided information to us, contact <a href="mailto:danieldavis16@gmail.com">danieldavis16@gmail.com</a> and we'll address it.
+      </p>
+
+      <div class="mono label">§ Changes</div>
+      <p>We'll update this page if data practices change. The effective date above reflects the current version. Material changes will also be flagged in the app's release notes.</p>
+
+      <div class="mono label">§ Contact</div>
+      <p>
+        <a href="mailto:danieldavis16@gmail.com">danieldavis16@gmail.com</a><br/>
+        Northland Studios
+      </p>
+
+      <p class="back">
+        <a href="/apps/daydream-retriever/support">Support &rarr;</a>
+      </p>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-hero { background: var(--bg-soft); border-bottom: 1px solid var(--rule); }
+  .page-hero-inner { max-width: var(--col-narrow); margin: 0 auto; padding: clamp(60px, 10vh, 100px) var(--pad-page); }
+  .page-hero .label { color: var(--accent); margin: 0 0 14px 0; }
+  .page-hero h1 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    margin: 0 0 22px 0;
+  }
+  .page-hero .lede {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  .section.narrow { padding-top: clamp(50px, 6vh, 80px); padding-bottom: clamp(50px, 6vh, 80px); max-width: var(--col-narrow); margin: 0 auto; padding-left: var(--pad-page); padding-right: var(--pad-page); }
+  .section .label { color: var(--accent); margin: 36px 0 12px 0; }
+  .section .label:first-child { margin-top: 0; }
+  .section p, .section ul {
+    font-size: 17px;
+    line-height: 1.66;
+    color: var(--ink-secondary);
+    margin: 0 0 18px 0;
+    max-width: 62ch;
+  }
+  .section ul { padding-left: 22px; }
+  .section li { margin: 0 0 10px 0; }
+  .section a { color: var(--accent); }
+  .section .back { margin-top: 36px; }
+</style>
