@@ -44,7 +44,7 @@ export interface AppEntry {
   blurb: string;
   /** 1 paragraph used in the Home grid card body (shorter than `blurb`). */
   cardBlurb: string;
-  /** Trail number in the park map (display-only; doesn't drive ordering). */
+  /** Display-only sequence number on cards / app pages; doesn't drive ordering. Field kept as `trailNumber` for backward-compat with components. */
   trailNumber: string;
   categories: AppCategory[];
   /** Primary category drives the chip styling on the home card. */
@@ -57,6 +57,8 @@ export interface AppEntry {
   /** Renaming history shown as a quiet caption. */
   previously?: string[];
   appStore: AppStoreInfo;
+  /** True if `/public/screenshots/<slug>/0N.png` files exist; opts the per-app strip into real-image rendering. */
+  hasRealScreenshots?: boolean;
   /** Pricing model copy for per-app page sidebar. */
   pricing?: string;
   /** Tech-credit line for press kit / per-app page footer. */
@@ -77,7 +79,7 @@ export const apps: AppEntry[] = [
     cardBlurb:
       'Mindful HealthKit fitness tracking — workouts, habits, journal, goals — wrapped in a painted-dawn UI that respects the day you actually had.',
     blurb:
-      'Cairn is a calm fitness companion. Workouts pull from HealthKit, habits live in stone chains, journal entries hold what the numbers can’t. It’s the only Northland app on a subscription — because health data deserves to stick around, and because someone has to pay for the trail signs.',
+      'Cairn is a calm fitness companion. Workouts pull from HealthKit, habits live in stone chains, journal entries hold what the numbers can’t. It’s the only Northland app on a subscription — because health data deserves to stick around, and because software that has to live for years has to be funded the same way.',
     trailNumber: '01',
     categories: ['Family', 'Productivity'],
     primaryCategory: 'Productivity',
@@ -183,7 +185,7 @@ export const apps: AppEntry[] = [
     cardBlurb:
       'A Mac Kanban with embedded terminals on each card. For developers who treat their TODO list as a workspace, not a checklist.',
     blurb:
-      'Kanban Terminal is a Mac-only Kanban board where every card can hold a terminal. Drag a card to "in progress" and your dev environment is right there — logs scrolling, server running, branch checked out. Drop it back to "done" and the terminals tuck away. Built for the one-person studio: this is how Northland keeps the trails walkable.',
+      'Kanban Terminal is a Mac-only Kanban board where every card can hold a terminal. Drag a card to "in progress" and your dev environment is right there — logs scrolling, server running, branch checked out. Drop it back to "done" and the terminals tuck away. Built for the one-person studio: this is how Northland ships ten apps without losing track of any of them.',
     trailNumber: '05',
     categories: ['Productivity'],
     primaryCategory: 'Productivity',
@@ -242,13 +244,13 @@ export const apps: AppEntry[] = [
     platforms: ['iPhone', 'iPad'],
     icon: '/icons/daydream-retriever.png',
     screenshots: [
+      { label: 'Menu',       alt: 'Daydream Retriever — Title menu with retriever mascot illustration' },
       { label: 'Flight',     alt: 'Daydream Retriever — Mid-flight scene with painted clouds' },
       { label: 'Cosmetics',  alt: 'Daydream Retriever — Cosmetic unlocks (bandanas, collars)' },
-      { label: 'Daily run',  alt: 'Daydream Retriever — Daily-run summary screen' },
-      { label: 'Soft fail',  alt: 'Daydream Retriever — Soft-fail / retry screen' },
     ],
     previously: ['Flappy Retriever'],
     appStore: { expectedRelease: '2026-Q2' },
+    hasRealScreenshots: true,
     pricing: '$1.99 paid upfront',
     techCredit: 'Capacitor · Phaser · custom paint shader',
     internalRepo: '~/projects/flappy-retriever-ios/',
@@ -319,7 +321,7 @@ export const apps: AppEntry[] = [
     categories: ['Game'],
     primaryCategory: 'Game',
     platforms: ['iPhone', 'iPad'],
-    icon: '/icons/cascadia.svg',
+    icon: '/icons/cascadia.png',
     screenshots: [
       { label: 'Play',     alt: 'Cascadia — Mid-game falling blocks against forest backdrop' },
       { label: 'Long-play', alt: 'Cascadia — Long-play mode with plateau speed' },
@@ -332,7 +334,7 @@ export const apps: AppEntry[] = [
     techCredit: 'Capacitor · Phaser · custom shader for foliage backdrop',
     internalRepo: '~/Documents/Documents/Claude/tetris-ios/',
     story:
-      'Currently being rebranded from the working "Tetris" name to match a national-park visual register — the icon now reads as a stand of conifers in cross-section. The mechanic is faithful; the room around it is the differentiator.',
+      'Currently being rebranded from the working "Tetris" name to match a quieter, forest-morning visual register — the icon now reads as a stand of conifers in cross-section. The mechanic is faithful; the room around it is the differentiator.',
   },
 ];
 

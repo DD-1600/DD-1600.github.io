@@ -17,7 +17,7 @@ import { apps } from '@data/apps';
       <div class="page-hero-inner">
         <Blaze size={48} tone="forest" fg="bone" />
         <div class="mono label">§ Press kit</div>
-        <h1>Field guide<br />for the&nbsp;press.</h1>
+        <h1>Press kit<br />for Northland&nbsp;Studios.</h1>
         <p class="lede">
           Logo lockups, palette, studio bio, per-app assets. Everything in one place.
           For interview requests or asset variants we don't have here, write
@@ -31,11 +31,11 @@ import { apps } from '@data/apps';
       <p class="bio">
         Northland Studios is a small, solo iOS app shop in the north woods of the internet.
         One person, many small apps — games, utilities, family software, weather, and
-        faith — published quarterly under one signage system. The studio is the park;
-        the apps are the trails.
+        faith — published quarterly under one shared signage system. The studio is the
+        umbrella; each app stands on its own underneath.
       </p>
       <p class="bio quote">
-        <em>“One person makes the trails. The signs all match. The trails do not.”</em>
+        <em>“One person makes the apps. The signage all matches. The apps do not.”</em>
       </p>
       <button class="copy-btn mono" data-copy="bio">Copy studio bio</button>
     </section>
@@ -100,7 +100,7 @@ import { apps } from '@data/apps';
         </div>
         <div>
           <div class="mono small">Labels &amp; captions</div>
-          <p class="type-sample mono">EST. 2026 · OPEN ALL SEASONS</p>
+          <p class="type-sample mono">EST. 2026 · OPEN YEAR-ROUND</p>
           <p class="type-meta">Geist Mono · 500</p>
         </div>
       </div>
@@ -139,7 +139,7 @@ import { apps } from '@data/apps';
 <script>
   document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const txt = `Northland Studios is a small, solo iOS app shop in the north woods of the internet. One person, many small apps — games, utilities, family software, weather, and faith — published quarterly under one signage system. The studio is the park; the apps are the trails.\n\n"One person makes the trails. The signs all match. The trails do not."`;
+      const txt = `Northland Studios is a small, solo iOS app shop in the north woods of the internet. One person, many small apps — games, utilities, family software, weather, and faith — published quarterly under one shared signage system. The studio is the umbrella; each app stands on its own underneath.\n\n"One person makes the apps. The signage all matches. The apps do not."`;
       navigator.clipboard?.writeText(txt).then(() => {
         const orig = btn.textContent;
         btn.textContent = 'Copied ✓';
