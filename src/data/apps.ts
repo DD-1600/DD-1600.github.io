@@ -319,7 +319,7 @@ export const apps: AppEntry[] = [
     categories: ['Game'],
     primaryCategory: 'Game',
     platforms: ['iPhone', 'iPad'],
-    icon: '/icons/cascadia.svg',
+    icon: '/icons/cascadia.png',
     screenshots: [
       { label: 'Play',     alt: 'Cascadia — Mid-game falling blocks against forest backdrop' },
       { label: 'Long-play', alt: 'Cascadia — Long-play mode with plateau speed' },
