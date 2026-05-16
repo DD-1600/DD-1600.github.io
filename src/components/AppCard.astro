@@ -21,7 +21,7 @@ const featured = variant === 'featured';
   aria-label={`${app.name} — ${app.tagline}`}
 >
   <div class="mono trail-no">
-    Trail · {app.trailNumber} — {app.primaryCategory}
+    No. {app.trailNumber} — {app.primaryCategory}
   </div>
 
   <div class="head">
@@ -40,7 +40,7 @@ const featured = variant === 'featured';
     <div class="chips">
       {app.categories.slice(0, 3).map((c) => <span class="chip">{c}</span>)}
     </div>
-    <span class="more mono">View trail →</span>
+    <span class="more mono">View app →</span>
   </div>
 </a>
 

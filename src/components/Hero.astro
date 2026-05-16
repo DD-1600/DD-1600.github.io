@@ -3,7 +3,7 @@ import Blaze from '@components/Blaze.astro';
 import TopoBackdrop from '@components/TopoBackdrop.astro';
 import { apps } from '@data/apps';
 
-const trailCount = apps.length;
+const appCount = apps.length;
 const categoryDisplay = ['Games', 'Family', 'Productivity', 'Faith', 'Utility'].join(' · ');
 ---
 
@@ -14,7 +14,7 @@ const categoryDisplay = ['Games', 'Family', 'Productivity', 'Faith', 'Utility'].
       <Blaze size={16} tone="rescue" fg="bone" />
       <span>Est. 2026</span>
       <span class="dot">·</span>
-      <span>Open all seasons</span>
+      <span>Open year-round</span>
       <span class="dot">·</span>
       <span>Publishing apps quarterly</span>
     </div>
@@ -30,13 +30,13 @@ const categoryDisplay = ['Games', 'Family', 'Productivity', 'Faith', 'Utility'].
 
     <p class="hero-body">
       One person, many small apps. Games, utilities, niche and weird stuff.
-      Each app is a trail. The studio is the park around them.
+      Each app gets its own audience; the studio is the shared signage.
     </p>
 
     <div class="hero-meta mono">
-      <div class="item"><span>Trails open</span><span class="v">{trailCount}</span></div>
+      <div class="item"><span>Apps shipped</span><span class="v">{appCount}</span></div>
       <div class="item"><span>Categories</span><span class="v">{categoryDisplay}</span></div>
-      <div class="item"><span>Park ranger</span><span class="v">sole proprietor</span></div>
+      <div class="item"><span>Built by</span><span class="v">one person</span></div>
     </div>
   </div>
 </header>
