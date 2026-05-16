@@ -57,6 +57,8 @@ export interface AppEntry {
   /** Renaming history shown as a quiet caption. */
   previously?: string[];
   appStore: AppStoreInfo;
+  /** True if `/public/screenshots/<slug>/0N.png` files exist; opts the per-app strip into real-image rendering. */
+  hasRealScreenshots?: boolean;
   /** Pricing model copy for per-app page sidebar. */
   pricing?: string;
   /** Tech-credit line for press kit / per-app page footer. */
@@ -242,13 +244,13 @@ export const apps: AppEntry[] = [
     platforms: ['iPhone', 'iPad'],
     icon: '/icons/daydream-retriever.png',
     screenshots: [
+      { label: 'Menu',       alt: 'Daydream Retriever — Title menu with retriever mascot illustration' },
       { label: 'Flight',     alt: 'Daydream Retriever — Mid-flight scene with painted clouds' },
       { label: 'Cosmetics',  alt: 'Daydream Retriever — Cosmetic unlocks (bandanas, collars)' },
-      { label: 'Daily run',  alt: 'Daydream Retriever — Daily-run summary screen' },
-      { label: 'Soft fail',  alt: 'Daydream Retriever — Soft-fail / retry screen' },
     ],
     previously: ['Flappy Retriever'],
     appStore: { expectedRelease: '2026-Q2' },
+    hasRealScreenshots: true,
     pricing: '$1.99 paid upfront',
     techCredit: 'Capacitor · Phaser · custom paint shader',
     internalRepo: '~/projects/flappy-retriever-ios/',

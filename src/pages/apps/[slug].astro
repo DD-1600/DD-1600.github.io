@@ -49,7 +49,7 @@ const prevStr = app.previously?.length ? `Formerly: ${app.previously.join(', ')}
         <div class="mono crumbs">
           <a href="/">Northland</a>
           <span class="sep">›</span>
-          <a href="/#trails">Apps</a>
+          <a href="/#apps">Apps</a>
           <span class="sep">›</span>
           <span>{app.name}</span>
         </div>
@@ -60,7 +60,7 @@ const prevStr = app.previously?.length ? `Formerly: ${app.previously.join(', ')}
           </div>
 
           <div class="app-hero-text">
-            <div class="mono trail">Trail · {app.trailNumber} — {app.primaryCategory}</div>
+            <div class="mono trail">No. {app.trailNumber} — {app.primaryCategory}</div>
             <h1 class="app-name">{app.name}</h1>
             <p class="app-tagline">{app.tagline}</p>
             {prevStr && <p class="mono prev">{prevStr}</p>}
@@ -94,7 +94,7 @@ const prevStr = app.previously?.length ? `Formerly: ${app.previously.join(', ')}
 
     <section class="app-section shots-section">
       <div class="mono label centered">§ Screens</div>
-      <ScreenshotStrip slug={app.slug} screenshots={app.screenshots} feature={true} />
+      <ScreenshotStrip slug={app.slug} screenshots={app.screenshots} feature={true} hasRealScreenshots={app.hasRealScreenshots ?? false} />
     </section>
 
     {/* ─────────── Spec ─────────── */}
@@ -131,9 +131,9 @@ const prevStr = app.previously?.length ? `Formerly: ${app.previously.join(', ')}
         <div class="section-header">
           <div>
             <div class="mono label">§ More from Northland</div>
-            <h2>Adjacent trails.</h2>
+            <h2>Other apps from the studio.</h2>
           </div>
-          <p class="lede">Other apps in the park, made by the same person.</p>
+          <p class="lede">Other apps from the same studio, made by the same person.</p>
         </div>
         <div class="more-grid">
           {cross.map((a) => <AppCard app={a} variant="standard" />)}
@@ -143,7 +143,7 @@ const prevStr = app.previously?.length ? `Formerly: ${app.previously.join(', ')}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polyline points="12 19 5 12 12 5" /><line x1="19" y1="12" x2="5" y2="12" />
             </svg>
-            <span>Back to all trails</span>
+            <span>Back to all apps</span>
           </a>
         </div>
       </section>
